@@ -19,10 +19,65 @@ body {
   width: 500px;
 }
 
-.search {
+.search-repository__input {
   width: 500px;
   height: 60px;
   font-size: 48px;
-  font-weight: 400;
   padding-left: 10px;
+}
+
+.search-repository__results {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 220px;
+  margin: 0 auto;
+}
+
+.search-repository__selected {
+  display: flex;
+  flex-direction: column;
+  margin: 45px auto;
+  width: 500px;
+}
+
+.result {
+  margin-top: -1px;
+  width: auto;
+  height: 44px;
+  padding-left: 10px;
+  background-color: #e3e3e3;
+  line-height: 44px;
+  font-size: 24px;
+  border: 2px solid black;
+  overflow: hidden;
+}
+
+.result:hover {
+  background-color: #65cdf9;
+  cursor: pointer;
+}
+
+.selected {
+  position: relative;
+  display: flex;
+  width: 500px;
+  height: 100px;
+  padding: 10px 10px;
+  background-color: #e27beb;
+  border: 1px solid black;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.btn-close {
+  position: absolute;
+  top: 25px;
+  left: 420px;
+  width: 50px;
+  height: 50px;
+  background: url(img/X.png) no-repeat;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
