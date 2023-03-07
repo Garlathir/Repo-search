@@ -3,6 +3,7 @@ const foundRepository = document.querySelector(".search-repository__results");
 const selectedRepository = document.querySelector(
   ".search-repository__selected"
 );
+const notExist = document.querySelector(".not-exist");
 
 async function searchRepos() {
   let inputValue = findRepository.value;
@@ -13,11 +14,15 @@ async function searchRepos() {
 
   const url = new URL("https://api.github.com/search/repositories?q=Q");
   url.searchParams.append("q", inputValue);
-
+  url.searchParams.append("per_page", 5);
   try {
     const res = await fetch(url);
     if (res.ok) {
       const repos = await res.json();
+      if (repos.total_count === 0) {
+        notExist.innerHTML = `*Репозитория не существует`;
+      }
+      console.log(repos);
       showResult(repos.items);
     } else {
       return null;
@@ -31,10 +36,10 @@ function clearInput() {
   foundRepository.innerHTML = "";
 }
 
-function showResult(repositories) {
+function showResult(repositories, first = 5) {
   clearInput();
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < first; i++) {
     let name = repositories[i].name;
     let owner = repositories[i].owner.login;
     let stars = repositories[i].stargazers_count;
@@ -62,10 +67,11 @@ function debounce(fn, debounceTime) {
 }
 
 findRepository.addEventListener("input", debounce(searchRepos, 400));
+
 foundRepository.addEventListener("click", (event) => {
   clearInput();
+  notExist.innerHTML = "";
   findRepository.value = "";
-
   const target = event.target;
   if (!target.classList.contains("result")) {
     return;

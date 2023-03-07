@@ -81,3 +81,10 @@ body {
   border: none;
   cursor: pointer;
 }
+
+.not-exist {
+  display: inline;
+  width: 500px;
+  height: 19px;
+  color: red;
+}
